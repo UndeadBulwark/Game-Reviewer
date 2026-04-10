@@ -356,7 +356,8 @@ input[type=range]::-moz-range-thumb{
           <span class="pill" onclick="toggleFlag(this,'neg')">Broken at launch</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Censored content</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">DEI deductions</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Denuvo DRM</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Denuvo/DRM</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Kernel AC</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Short campaign</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Poor PC port</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Repetitive missions</span>
@@ -369,6 +370,7 @@ input[type=range]::-moz-range-thumb{
           <span class="pill" onclick="toggleFlag(this,'neg')">Empty open world</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Weak ending</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Live-service grind</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Body Type A &amp; B</span>
         </div>
       </div>
     </div>
@@ -658,10 +660,14 @@ function setScore(id, val) {
 function calcScore() {
   let w = 0;
   CRITERIA.forEach(c => w += scores[c.id] * c.weight);
+  const flagImpact = calcFlagImpact();
+  return Math.max(0, Math.min(10, parseFloat((w + flagImpact).toFixed(1))));
+}
+
+function calcFlagImpact() {
   const posCount = document.querySelectorAll('#pos-flags .pill.pos').length;
   const negCount = document.querySelectorAll('#neg-flags .pill.neg').length;
-  const flagImpact = Math.min(posCount * 0.08, 0.5) - Math.min(negCount * 0.1, 0.7);
-  return Math.max(0, Math.min(10, parseFloat((w + flagImpact).toFixed(1))));
+  return Math.min(posCount * 0.06, 0.4) - Math.min(negCount * 0.16, 1.0);
 }
 
 function calcValueScore() {
@@ -673,7 +679,8 @@ function calcValueScore() {
   const dollarsPerHour = Number.isFinite(hours) && hours > 0 ? price / hours : null;
   const priceScrutiny = Math.pow(70 / price, 0.22);
   const timeValue = dollarsPerHour === null ? 1 : Math.pow(3 / Math.max(dollarsPerHour, 0.25), 0.28);
-  const value = ws * priceScrutiny * timeValue;
+  const flagValueMod = 1 + calcFlagImpact() * 0.06;
+  const value = ws * priceScrutiny * timeValue * flagValueMod;
 
   return {
     score: Math.max(0, Math.min(10, parseFloat(value.toFixed(1)))),
@@ -863,11 +870,14 @@ function buildExportText(review) {
   const ws    = review ? review.finalScore : calcScore();
   const price = parseFloat(r.price);
   const hours = parseFloat(r.hours);
+  const posCount = (r.posFlags || []).length;
+  const negCount = (r.negFlags || []).length;
+  const flagImpact = Math.min(posCount * 0.08, 0.5) - Math.min(negCount * 0.1, 0.7);
   const dollarsPerHour = Number.isFinite(price) && price > 0 && Number.isFinite(hours) && hours > 0
     ? parseFloat((price / hours).toFixed(2))
     : null;
   const value = Number.isFinite(price) && price > 0
-    ? Math.max(0, Math.min(10, parseFloat((ws * Math.pow(70 / price, 0.22) * Math.pow(3 / Math.max(dollarsPerHour || 3, 0.25), 0.28)).toFixed(1))))
+    ? Math.max(0, Math.min(10, parseFloat((ws * Math.pow(70 / price, 0.22) * Math.pow(3 / Math.max(dollarsPerHour || 3, 0.25), 0.28) * (1 + flagImpact * 0.06)).toFixed(1))))
     : null;
   const grade = GRADES.find(([t]) => ws >= t)[1];
   const lines = [];
