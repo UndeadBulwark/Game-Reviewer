@@ -381,18 +381,52 @@ input[type=range]::-moz-range-thumb{
 <script>
 const CRITERIA = [
   {
-    id:'gameplay', name:'Gameplay loop', weight:0.25, group:'Core',
-    desc:'How efficiently the game delivers its core experience. Penalizes padding, forced walking, unskippable cutscenes that interrupt play, and time spent doing nothing meaningful between actual gameplay.',
+    id:'gameplay', name:'Gameplay', weight:0.10, group:'Core',
+    desc:'How the game feels to control moment to moment. Focuses on responsiveness, combat or traversal feel, player agency, and whether interacting with the game is satisfying on its own.',
+    labels:[
+      'Actively unpleasant to play',
+      'Controls or combat feel broken',
+      'Very clumsy, frustrating moment to moment',
+      'Weak feel, limited player expression',
+      'Below average, often awkward',
+      'Functional but unremarkable',
+      'Solid fundamentals with some rough edges',
+      'Good feel, consistently enjoyable to play',
+      'Strong mechanics with clear player control',
+      'Excellent feel, highly responsive and satisfying',
+      'Best-in-class. Pure joy to control',
+    ]
+  },
+  {
+    id:'engagement', name:'Engagement', weight:0.07, group:'Core',
+    desc:'How compelling the core gameplay loop is once you are in it. Covers build variety, enemy or encounter quality, decision-making, and whether the game keeps the moment-to-moment play interesting over time.',
+    labels:[
+      'The loop is dead on arrival',
+      'Repetitive almost immediately',
+      'Very shallow, runs out of ideas fast',
+      'Limited variety, gets old quickly',
+      'Below average, only occasionally engaging',
+      'Average loop, enough to keep moving',
+      'Decent variety with some hooks',
+      'Good loop, consistently engaging',
+      'Strong loop with meaningful variety',
+      'Excellent loop, hard to stop playing',
+      'Genre benchmark for long-term engagement',
+    ]
+  },
+  {
+    id:'spacing', name:'Spacing', weight:0.08, group:'Core',
+    desc:'How efficiently the game delivers its core experience over time. Penalizes padding, forced walking, unskippable cutscenes that interrupt play, and time spent doing nothing meaningful between actual gameplay.',
     labels:[
       'Gameplay buried under constant padding',
-      'Action is rare — the loop is mostly filler',
+      'Action is rare and content spacing is poor',
       'Frequent dead time, pacing is loose',
       'Noticeable padding between good moments',
       'Tolerable pacing, some filler present',
       'Average loop, occasional wasted time',
       'Decent pacing, filler is minimal',
       'Engaging loop, rarely wastes your time',
-      'Tight and consistent — pulls you forward',
+      'Tight and consistent, pulls you forward',
       'Near-perfect loop, every moment earns its place',
       'Every second is purposeful. Genre benchmark',
     ]
@@ -415,20 +449,54 @@ const CRITERIA = [
     ]
   },
   {
-    id:'story', name:'Story / writing', weight:0.15, group:'Writing & Audio',
-    desc:'Narrative quality, character writing, dialogue, and world-building. For games with no story, score on how well the premise serves the gameplay.',
+    id:'story', name:'Story', weight:0.07, group:'Writing & Audio',
+    desc:'The quality of the main narrative arc, premise, plot progression, and payoff. For games with minimal story, score how well the premise frames the experience.',
     labels:[
       'Actively harmful to the experience',
-      'Incoherent or offensively lazy',
-      'Poor writing, cardboard characters',
-      'Weak story, forgettable cast',
+      'Incoherent, broken, or pointless',
+      'Very weak plot with no payoff',
+      'Thin story, little reason to care',
       'Generic but functional',
-      'Passable — gets out of its own way',
-      'Decent story with some memorable moments',
-      'Good writing, characters you remember',
-      'Strong narrative with a well-developed cast',
-      'Exceptional writing, hard to put down',
-      'Genre-defining. Writing elevates everything',
+      'Passable, mostly gets out of the way',
+      'Decent story with some memorable beats',
+      'Good narrative that carries the experience',
+      'Strong story with real momentum',
+      'Exceptional story, hard to put down',
+      'Genre-defining. The story alone is worth it',
+    ]
+  },
+  {
+    id:'writing', name:'Writing', weight:0.05, group:'Writing & Audio',
+    desc:'Dialogue quality, characterization, scene writing, lore delivery, and whether the words on the page or screen hold up on their own.',
+    labels:[
+      'Actively painful to listen to or read',
+      'Embarrassingly bad, amateur writing',
+      'Poor dialogue and flat characterization',
+      'Weak writing, mostly forgettable',
+      'Below average, some rough scenes',
+      'Functional, nothing special',
+      'Decent writing with a few standout moments',
+      'Good writing, characters feel considered',
+      'Strong writing with memorable scenes',
+      'Excellent writing throughout',
+      'Best-in-class writing. Quote-worthy and sharp',
+    ]
+  },
+  {
+    id:'worldinteraction', name:'World interaction', weight:0.03, group:'Writing & Audio',
+    desc:'How much the world, story state, or characters respond to the player. A good narrative lands harder when the player can meaningfully affect what changes around them.',
+    labels:[
+      'Nothing reacts to the player at all',
+      'Almost no meaningful response or consequence',
+      'Very limited reactivity, mostly cosmetic',
+      'Rare signs of player impact',
+      'Below average, consequences feel thin',
+      'Average reactivity, enough to sell the premise',
+      'Decent response to player choices or actions',
+      'Good world feedback with noticeable consequences',
+      'Strong reactivity that deepens the story',
+      'Excellent integration of player impact and narrative',
+      'Genre benchmark for world and narrative reactivity',
     ]
   },
   {
