@@ -22,258 +22,130 @@
   --red: #ff4d4d;
   --amber: #f5a623;
   --green: #44d88a;
-  --blue: #4da6ff;
   --mono: 'IBM Plex Mono', monospace;
   --sans: 'IBM Plex Sans', sans-serif;
   --display: 'Bebas Neue', sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--sans);
-  font-size:14px;
-  min-height:100vh;
-  line-height:1.6;
-}
-
-/* scrollbar */
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:14px;min-height:100vh;line-height:1.6}
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--bg4);border-radius:2px}
 
-/* --- HEADER --- */
-header {
-  border-bottom:1px solid var(--border);
-  padding:0 2rem;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  height:56px;
-  position:sticky;
-  top:0;
-  background:rgba(13,13,15,0.92);
-  backdrop-filter:blur(12px);
-  z-index:100;
+header{
+  border-bottom:1px solid var(--border);padding:0 2rem;
+  display:flex;align-items:center;justify-content:space-between;height:56px;
+  position:sticky;top:0;background:rgba(13,13,15,0.92);backdrop-filter:blur(12px);z-index:100;
 }
-.logo{
-  font-family:var(--display);
-  font-size:28px;
-  letter-spacing:0.04em;
-  color:var(--accent);
-  line-height:1;
-}
-.logo span{color:var(--text3);font-size:14px;font-family:var(--mono);margin-left:12px;vertical-align:middle}
+.logo{font-family:var(--display);font-size:28px;letter-spacing:0.04em;color:var(--accent);line-height:1}
 .header-actions{display:flex;gap:8px}
-
-/* --- LAYOUT --- */
 .container{max-width:860px;margin:0 auto;padding:2rem 1.5rem 4rem}
 
-/* --- TABS --- */
-.tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:2rem}
-.tab{
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  padding:10px 20px;
-  color:var(--text3);
-  cursor:pointer;
-  border-bottom:2px solid transparent;
-  margin-bottom:-1px;
-  transition:color 0.15s,border-color 0.15s;
-}
-.tab:hover{color:var(--text2)}
-.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-
-/* --- SECTIONS --- */
-.section{margin-bottom:1.5rem}
 .section-label{
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--text3);
-  margin-bottom:12px;
-  display:flex;
-  align-items:center;
-  gap:8px;
+  font-family:var(--mono);font-size:10px;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:12px;display:flex;align-items:center;gap:8px;
 }
 .section-label::after{content:'';flex:1;height:1px;background:var(--border)}
 
-/* --- CARD --- */
-.card{
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:4px;
-  padding:1.25rem;
-  margin-bottom:12px;
-}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:4px;padding:1.25rem;margin-bottom:12px}
 
-/* --- GRID --- */
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
-.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+
 @media(max-width:600px){
-  .grid2,.grid3,.grid4{grid-template-columns:1fr 1fr}
+  .grid2,.grid3{grid-template-columns:1fr 1fr}
   header{padding:0 1rem}
   .container{padding:1.5rem 1rem 3rem}
 }
-@media(max-width:400px){
-  .grid3,.grid4{grid-template-columns:1fr}
-}
 
-/* --- FORM ELEMENTS --- */
 .field{display:flex;flex-direction:column;gap:5px}
-.field label{
-  font-family:var(--mono);
-  font-size:10px;
-  letter-spacing:0.1em;
-  text-transform:uppercase;
-  color:var(--text3);
-}
+.field label{font-family:var(--mono);font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text3)}
 input[type=text],input[type=number],select,textarea{
-  background:var(--bg3);
-  border:1px solid var(--border);
-  border-radius:3px;
-  color:var(--text);
-  font-family:var(--sans);
-  font-size:13px;
-  padding:8px 10px;
-  outline:none;
-  transition:border-color 0.15s;
-  width:100%;
+  background:var(--bg3);border:1px solid var(--border);border-radius:3px;
+  color:var(--text);font-family:var(--sans);font-size:13px;padding:8px 10px;outline:none;
+  transition:border-color 0.15s;width:100%;
 }
-input[type=text]:focus,input[type=number]:focus,select:focus,textarea:focus{
-  border-color:var(--border2);
-  background:var(--bg4);
-}
+input:focus,select:focus,textarea:focus{border-color:var(--border2);background:var(--bg4)}
 textarea{resize:vertical;min-height:80px;line-height:1.6}
 select option{background:var(--bg3)}
 input[type=number]::-webkit-inner-spin-button{opacity:0.3}
 
-/* --- RANGE SLIDER --- */
-.crit-row{
-  display:grid;
-  grid-template-columns:180px 1fr 44px;
-  align-items:center;
-  gap:16px;
-  padding:12px 0;
-  border-bottom:1px solid var(--border);
+/* CRITERIA */
+.crit-group-label{
+  font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;
+  color:var(--text3);padding:10px 0 6px;border-bottom:1px solid var(--border);margin-bottom:2px;
 }
+.crit-row{display:grid;grid-template-columns:1fr 60px;gap:16px;padding:14px 0;border-bottom:1px solid var(--border)}
 .crit-row:last-child{border-bottom:none}
-.crit-info{}
-.crit-name{font-size:13px;font-weight:500;color:var(--text)}
-.crit-sub{font-size:11px;color:var(--text3);margin-top:2px}
-.crit-weight{font-family:var(--mono);font-size:10px;color:var(--text3)}
+.crit-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:3px}
+.crit-desc{font-size:11px;color:var(--text3);line-height:1.55;margin-bottom:10px;max-width:600px}
 
 input[type=range]{
-  -webkit-appearance:none;
-  appearance:none;
-  width:100%;
-  height:3px;
-  background:var(--bg4);
-  border-radius:2px;
-  outline:none;
-  cursor:pointer;
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:3px;background:var(--bg4);border-radius:2px;outline:none;cursor:pointer;
 }
 input[type=range]::-webkit-slider-thumb{
-  -webkit-appearance:none;
-  width:14px;height:14px;
-  border-radius:50%;
-  background:var(--accent);
-  cursor:pointer;
-  transition:transform 0.1s;
+  -webkit-appearance:none;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);cursor:pointer;transition:transform 0.1s;
 }
 input[type=range]::-webkit-slider-thumb:hover{transform:scale(1.2)}
 input[type=range]::-moz-range-thumb{
-  width:14px;height:14px;
-  border-radius:50%;
-  background:var(--accent);
-  border:none;
-  cursor:pointer;
-}
-.crit-val{
-  font-family:var(--mono);
-  font-size:18px;
-  font-weight:500;
-  color:var(--accent);
-  text-align:right;
+  width:14px;height:14px;border-radius:50%;background:var(--accent);border:none;cursor:pointer;
 }
 
-/* --- SCORE CARDS --- */
-.score-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
-.score-card{
-  background:var(--bg3);
-  border:1px solid var(--border);
-  border-radius:4px;
-  padding:14px 12px;
-  text-align:center;
+.crit-right{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.crit-val{font-family:var(--display);font-size:38px;color:var(--accent);line-height:1;text-align:center}
+.crit-val-word{font-family:var(--mono);font-size:9px;color:var(--text3);text-align:center;letter-spacing:0.04em}
+
+.rating-bubble{
+  font-family:var(--mono);font-size:10px;color:var(--text2);
+  background:var(--bg3);border-left:2px solid var(--accent);
+  padding:5px 10px;margin-top:6px;line-height:1.5;border-radius:0 3px 3px 0;
 }
-.score-card-label{
-  font-family:var(--mono);
-  font-size:9px;
-  letter-spacing:0.12em;
-  text-transform:uppercase;
-  color:var(--text3);
-  margin-bottom:6px;
+
+.weight-chip{
+  font-family:var(--mono);font-size:9px;color:var(--text3);background:var(--bg4);
+  border:1px solid var(--border);border-radius:2px;padding:2px 6px;
+  display:inline-block;margin-left:6px;vertical-align:middle;
 }
-.score-card-val{
-  font-family:var(--display);
-  font-size:36px;
-  letter-spacing:0.02em;
-  line-height:1;
-  color:var(--text);
-  transition:color 0.3s;
-}
+
+/* SCORE */
+.score-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.score-card{background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:14px 12px;text-align:center}
+.score-card-label{font-family:var(--mono);font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:6px}
+.score-card-val{font-family:var(--display);font-size:36px;letter-spacing:0.02em;line-height:1;color:var(--text);transition:color 0.3s}
 .score-card-val.hi{color:var(--green)}
 .score-card-val.mid{color:var(--amber)}
 .score-card-val.lo{color:var(--red)}
 
-/* --- PROGRESS BAR --- */
-.progress-wrap{position:relative;height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-bottom:4px}
-.progress-fill{height:100%;border-radius:2px;transition:width 0.4s cubic-bezier(0.4,0,0.2,1),background 0.4s}
 .progress-label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:6px}
+.progress-wrap{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.progress-fill{height:100%;border-radius:2px;transition:width 0.4s cubic-bezier(0.4,0,0.2,1),background 0.4s}
 
-/* --- BREAKDOWN BARS --- */
-.breakdown{margin-top:12px}
 .breakdown-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
-.breakdown-name{font-size:12px;color:var(--text2);width:130px;flex-shrink:0}
+.breakdown-name{font-size:11px;font-family:var(--mono);color:var(--text2);width:140px;flex-shrink:0}
 .breakdown-bar-wrap{flex:1;height:3px;background:var(--bg4);border-radius:2px;overflow:hidden}
 .breakdown-fill{height:100%;background:var(--accent);border-radius:2px;transition:width 0.4s}
 .breakdown-num{font-family:var(--mono);font-size:11px;color:var(--text3);width:20px;text-align:right;flex-shrink:0}
 
-/* --- TAGS / PILLS --- */
+/* PILLS */
 .tags-wrap{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .pill{
-  font-size:11px;
-  font-family:var(--mono);
-  padding:4px 10px;
-  border-radius:2px;
-  border:1px solid var(--border);
-  color:var(--text3);
-  cursor:pointer;
-  transition:background 0.12s,color 0.12s,border-color 0.12s;
-  user-select:none;
+  font-size:11px;font-family:var(--mono);padding:4px 10px;border-radius:2px;
+  border:1px solid var(--border);color:var(--text3);cursor:pointer;
+  transition:background 0.12s,color 0.12s,border-color 0.12s;user-select:none;
 }
 .pill:hover{border-color:var(--border2);color:var(--text2)}
 .pill.pos{background:rgba(68,216,138,0.1);color:var(--green);border-color:rgba(68,216,138,0.25)}
 .pill.neg{background:rgba(255,77,77,0.1);color:var(--red);border-color:rgba(255,77,77,0.25)}
 
-/* --- BUTTONS --- */
+/* BUTTONS */
 .btn{
   display:inline-flex;align-items:center;gap:6px;
-  font-family:var(--mono);
-  font-size:11px;
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  padding:9px 18px;
-  border-radius:3px;
-  border:1px solid var(--border2);
-  background:transparent;
-  color:var(--text2);
-  cursor:pointer;
+  font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;
+  padding:9px 18px;border-radius:3px;border:1px solid var(--border2);
+  background:transparent;color:var(--text2);cursor:pointer;
   transition:background 0.15s,color 0.15s,border-color 0.15s;
 }
 .btn:hover{background:var(--bg3);color:var(--text);border-color:var(--border2)}
@@ -283,102 +155,52 @@ input[type=range]::-moz-range-thumb{
 .btn.danger:hover{background:rgba(255,77,77,0.1);color:var(--red);border-color:rgba(255,77,77,0.4)}
 .btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:1.5rem}
 
-/* --- REVIEWS LIST --- */
+/* REVIEWS LIST */
 .review-item{
-  background:var(--bg2);
-  border:1px solid var(--border);
-  border-radius:4px;
-  padding:1rem 1.25rem;
-  display:flex;
-  align-items:center;
-  gap:1rem;
-  margin-bottom:8px;
-  cursor:pointer;
-  transition:border-color 0.15s,background 0.15s;
+  background:var(--bg2);border:1px solid var(--border);border-radius:4px;
+  padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;margin-bottom:8px;
+  cursor:pointer;transition:border-color 0.15s,background 0.15s;
 }
 .review-item:hover{border-color:var(--border2);background:var(--bg3)}
-.review-score-badge{
-  font-family:var(--display);
-  font-size:32px;
-  min-width:54px;
-  text-align:center;
-  line-height:1;
-}
+.review-score-badge{font-family:var(--display);font-size:32px;min-width:54px;text-align:center;line-height:1}
 .review-info{flex:1}
 .review-title{font-size:15px;font-weight:500;color:var(--text);margin-bottom:2px}
 .review-meta{font-size:11px;font-family:var(--mono);color:var(--text3)}
 .review-actions{display:flex;gap:6px}
 .icon-btn{
-  background:transparent;border:none;
-  color:var(--text3);cursor:pointer;
-  font-size:14px;padding:4px 8px;
-  border-radius:3px;transition:color 0.12s,background 0.12s;
+  background:transparent;border:none;color:var(--text3);cursor:pointer;
+  font-size:14px;padding:4px 8px;border-radius:3px;transition:color 0.12s,background 0.12s;
 }
 .icon-btn:hover{color:var(--text);background:var(--bg4)}
 
-/* --- EXPORT --- */
 .export-box{
-  background:var(--bg3);
-  border:1px solid var(--border);
-  border-radius:4px;
-  padding:1.25rem;
-  font-family:var(--mono);
-  font-size:12px;
-  white-space:pre-wrap;
-  color:var(--text2);
-  line-height:1.8;
-  display:none;
-  margin-top:12px;
-  max-height:400px;
-  overflow-y:auto;
+  background:var(--bg3);border:1px solid var(--border);border-radius:4px;padding:1.25rem;
+  font-family:var(--mono);font-size:12px;white-space:pre-wrap;color:var(--text2);
+  line-height:1.8;display:none;margin-top:12px;max-height:400px;overflow-y:auto;
 }
 
-/* --- EMPTY STATE --- */
-.empty{
-  text-align:center;
-  padding:3rem 1rem;
-  color:var(--text3);
-  font-family:var(--mono);
-  font-size:12px;
-  letter-spacing:0.06em;
-}
+.empty{text-align:center;padding:3rem 1rem;color:var(--text3);font-family:var(--mono);font-size:12px;letter-spacing:0.06em}
 .empty-icon{font-size:32px;margin-bottom:12px;opacity:0.4}
 
-/* --- TOAST --- */
 .toast{
-  position:fixed;bottom:24px;right:24px;
-  background:var(--bg4);
-  border:1px solid var(--border2);
-  border-radius:4px;
-  padding:10px 16px;
-  font-family:var(--mono);
-  font-size:12px;
-  color:var(--text);
-  transform:translateY(60px);
-  opacity:0;
-  transition:transform 0.2s,opacity 0.2s;
-  z-index:200;
+  position:fixed;bottom:24px;right:24px;background:var(--bg4);border:1px solid var(--border2);
+  border-radius:4px;padding:10px 16px;font-family:var(--mono);font-size:12px;color:var(--text);
+  transform:translateY(60px);opacity:0;transition:transform 0.2s,opacity 0.2s;z-index:200;
 }
 .toast.show{transform:translateY(0);opacity:1}
 
-/* --- PAGE PANELS --- */
 .panel{display:none}
 .panel.active{display:block}
-
-/* animation */
 @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 .panel.active{animation:fadeUp 0.2s ease}
-
-/* --- RANGE TRACK COLOR --- */
-.range-wrap{position:relative;width:100%}
 </style>
 </head>
 <body>
 
 <header>
-  <div style="display:flex;align-items:center;gap:0">
+  <div style="display:flex;align-items:center">
     <span class="logo">GameLog</span>
-    <span class="logo" style="color:var(--text3);font-family:var(--mono);font-size:12px;margin-left:12px;letter-spacing:0.04em">Review System</span>
+    <span style="font-family:var(--mono);font-size:12px;color:var(--text3);margin-left:12px;letter-spacing:0.04em">Review System</span>
   </div>
   <div class="header-actions">
     <button class="btn" onclick="showPanel('reviews')">All reviews</button>
@@ -388,7 +210,6 @@ input[type=range]::-moz-range-thumb{
 
 <div class="container">
 
-  <!-- REVIEWS LIST PANEL -->
   <div class="panel active" id="panel-reviews">
     <div class="section-label">Saved reviews</div>
     <div id="reviews-list"></div>
@@ -398,10 +219,8 @@ input[type=range]::-moz-range-thumb{
     </div>
   </div>
 
-  <!-- REVIEW FORM PANEL -->
   <div class="panel" id="panel-form">
 
-    <!-- Live score pinned -->
     <div class="card" style="margin-bottom:1.5rem;border-color:rgba(212,242,68,0.15)">
       <div class="score-grid">
         <div class="score-card">
@@ -414,11 +233,7 @@ input[type=range]::-moz-range-thumb{
         </div>
         <div class="score-card">
           <div class="score-card-label">Verdict</div>
-          <div class="score-card-val" id="fs-verdict" style="font-size:16px;padding-top:6px">—</div>
-        </div>
-        <div class="score-card">
-          <div class="score-card-label">$/hr value</div>
-          <div class="score-card-val" id="fs-value" style="font-size:20px;padding-top:8px">—</div>
+          <div class="score-card-val" id="fs-verdict" style="font-size:16px;padding-top:8px">—</div>
         </div>
       </div>
       <div class="progress-label">
@@ -429,17 +244,16 @@ input[type=range]::-moz-range-thumb{
       </div>
     </div>
 
-    <!-- Game Info -->
     <div class="section-label">Game info</div>
     <div class="card">
       <div class="field" style="margin-bottom:12px">
         <label>Title</label>
-        <input type="text" id="g-title" placeholder="e.g. Elden Ring" oninput="onFieldChange()">
+        <input type="text" id="g-title" placeholder="e.g. Elden Ring">
       </div>
       <div class="grid3" style="margin-bottom:12px">
         <div class="field">
           <label>Platform</label>
-          <select id="g-platform" onchange="onFieldChange()">
+          <select id="g-platform">
             <option value="">Select</option>
             <option>PC</option><option>PS5</option><option>PS4</option>
             <option>Xbox Series X/S</option><option>Xbox One</option>
@@ -448,11 +262,11 @@ input[type=range]::-moz-range-thumb{
         </div>
         <div class="field">
           <label>Release year</label>
-          <input type="number" id="g-year" placeholder="2025" min="1970" max="2035" oninput="onFieldChange()">
+          <input type="number" id="g-year" placeholder="2025" min="1970" max="2035">
         </div>
         <div class="field">
           <label>Completion</label>
-          <select id="g-status" onchange="onFieldChange()">
+          <select id="g-status">
             <option value="">Select</option>
             <option>Completed (main)</option>
             <option>100% completed</option>
@@ -462,24 +276,12 @@ input[type=range]::-moz-range-thumb{
         </div>
       </div>
       <div class="grid2" style="margin-bottom:12px">
-        <div class="field">
-          <label>Developer</label>
-          <input type="text" id="g-dev" placeholder="Studio name" oninput="onFieldChange()">
-        </div>
-        <div class="field">
-          <label>Publisher</label>
-          <input type="text" id="g-pub" placeholder="Publisher" oninput="onFieldChange()">
-        </div>
+        <div class="field"><label>Developer</label><input type="text" id="g-dev" placeholder="Studio name"></div>
+        <div class="field"><label>Publisher</label><input type="text" id="g-pub" placeholder="Publisher"></div>
       </div>
       <div class="grid2" style="margin-bottom:12px">
-        <div class="field">
-          <label>Hours played</label>
-          <input type="number" id="g-hours" placeholder="0" min="0" oninput="updateScore()">
-        </div>
-        <div class="field">
-          <label>Price paid (USD)</label>
-          <input type="number" id="g-price" placeholder="0.00" min="0" step="0.01" oninput="updateScore()">
-        </div>
+        <div class="field"><label>Hours played</label><input type="number" id="g-hours" placeholder="0" min="0"></div>
+        <div class="field"><label>Price paid (USD)</label><input type="number" id="g-price" placeholder="0.00" min="0" step="0.01"></div>
       </div>
       <div class="field">
         <label>Genre tags</label>
@@ -504,17 +306,12 @@ input[type=range]::-moz-range-thumb{
       </div>
     </div>
 
-    <!-- Criteria -->
     <div class="section-label">Scored criteria</div>
     <div class="card" id="criteria-card"></div>
 
-    <!-- Score breakdown -->
-    <div class="section-label">Breakdown</div>
-    <div class="card">
-      <div class="breakdown" id="breakdown"></div>
-    </div>
+    <div class="section-label">Score breakdown</div>
+    <div class="card"><div id="breakdown"></div></div>
 
-    <!-- Flags -->
     <div class="section-label">Flags</div>
     <div class="card">
       <div style="margin-bottom:14px">
@@ -551,7 +348,6 @@ input[type=range]::-moz-range-thumb{
       </div>
     </div>
 
-    <!-- Notes -->
     <div class="section-label">Written notes</div>
     <div class="card">
       <div class="field" style="margin-bottom:12px">
@@ -577,385 +373,449 @@ input[type=range]::-moz-range-thumb{
     </div>
     <div class="export-box" id="export-box"></div>
 
-  </div><!-- /panel-form -->
-
-</div><!-- /container -->
+  </div>
+</div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 const CRITERIA = [
-  {id:'gameplay',   name:'Gameplay',       sub:'Mechanics, depth, feel',            weight:0.25},
-  {id:'story',      name:'Story / writing',sub:'Narrative, characters, dialogue',   weight:0.15},
-  {id:'perf',       name:'Performance',    sub:'Stability, framerate, bugs',        weight:0.15},
-  {id:'value',      name:'Value',          sub:'Content per dollar, length',        weight:0.15},
-  {id:'graphics',   name:'Graphics',       sub:'Visuals, art direction',            weight:0.10},
-  {id:'audio',      name:'Audio',          sub:'OST, SFX, voice acting',            weight:0.10},
-  {id:'innovation', name:'Innovation',     sub:'Originality within genre',          weight:0.10},
+  {
+    id:'gameplay', name:'Gameplay loop', weight:0.25, group:'Core',
+    desc:'How efficiently the game delivers its core experience. Penalizes padding, forced walking, unskippable cutscenes that interrupt play, and time spent doing nothing meaningful between actual gameplay.',
+    labels:[
+      'Gameplay buried under constant padding',
+      'Action is rare — the loop is mostly filler',
+      'Frequent dead time, pacing is loose',
+      'Noticeable padding between good moments',
+      'Tolerable pacing, some filler present',
+      'Average loop, occasional wasted time',
+      'Decent pacing, filler is minimal',
+      'Engaging loop, rarely wastes your time',
+      'Tight and consistent — pulls you forward',
+      'Near-perfect loop, every moment earns its place',
+      'Every second is purposeful. Genre benchmark',
+    ]
+  },
+  {
+    id:'performance', name:'Performance', weight:0.25, group:'Core',
+    desc:'Framerate stability, load times, crash frequency, and bugs that affect gameplay. A broken or unstable game cannot score well regardless of other qualities.',
+    labels:[
+      'Unplayable — crashes, game-breaking bugs',
+      'Severe issues, barely functional',
+      'Frequent crashes or major framerate problems',
+      'Noticeable stuttering or bugs that hurt play',
+      'Rough but playable, issues are annoying',
+      'Acceptable, some hiccups but manageable',
+      'Mostly stable with occasional minor issues',
+      'Solid — issues are rare and minor',
+      'Very clean, consistent framerate, fast loads',
+      'Near-flawless, negligible issues',
+      'Technically perfect. No excuses needed',
+    ]
+  },
+  {
+    id:'story', name:'Story / writing', weight:0.15, group:'Writing & Audio',
+    desc:'Narrative quality, character writing, dialogue, and world-building. For games with no story, score on how well the premise serves the gameplay.',
+    labels:[
+      'Actively harmful to the experience',
+      'Incoherent or offensively lazy',
+      'Poor writing, cardboard characters',
+      'Weak story, forgettable cast',
+      'Generic but functional',
+      'Passable — gets out of its own way',
+      'Decent story with some memorable moments',
+      'Good writing, characters you remember',
+      'Strong narrative with a well-developed cast',
+      'Exceptional writing, hard to put down',
+      'Genre-defining. Writing elevates everything',
+    ]
+  },
+  {
+    id:'audio', name:'Audio', weight:0.10, group:'Writing & Audio',
+    desc:'Soundtrack quality, sound design, and voice acting. Includes how well audio reinforces moment-to-moment gameplay feedback.',
+    labels:[
+      'Actively grating or missing entirely',
+      'Noticeably bad, distracting',
+      'Poor quality, weak sound design',
+      'Below average, unremarkable',
+      'Functional but forgettable',
+      'Acceptable, nothing stands out',
+      'Good in places, some memorable tracks',
+      'Strong OST — sound design supports gameplay',
+      'Excellent throughout, enhances immersion',
+      'Exceptional work across the board',
+      'Flawless. The audio is a reason to play',
+    ]
+  },
+  {
+    id:'artstyle', name:'Art style', weight:0.10, group:'Visuals',
+    desc:'How cohesive, distinctive, and well-executed the visual identity is. Strong art direction ages well and can carry weaker fidelity. Weak direction makes even high-poly games feel empty.',
+    labels:[
+      'No discernible direction, visual chaos',
+      'Incoherent or actively ugly',
+      'Poor visual identity, clashing elements',
+      'Generic — no unique visual language',
+      'Safe and unremarkable',
+      'Acceptable, competent but forgettable',
+      'Clear direction with some standout moments',
+      'Distinctive, consistent, well-executed',
+      'Strong identity that elevates every scene',
+      'Exceptional. Instantly recognizable',
+      'Iconic. Sets a visual benchmark for the genre',
+    ]
+  },
+  {
+    id:'animations', name:'Animations', weight:0.08, group:'Visuals',
+    desc:'Quality and responsiveness of character, enemy, and world animations. Includes whether animations serve gameplay feedback or work against it.',
+    labels:[
+      'Broken, janky, or missing entirely',
+      'Severely stiff — animations fight the controls',
+      'Poor quality, noticeable clipping and snapping',
+      'Below average, limited and repetitive',
+      'Functional but stiff in places',
+      'Acceptable, does the job without impressing',
+      'Decent, responsive with some rough edges',
+      'Good — mostly fluid and readable',
+      'Excellent quality, animations aid gameplay',
+      'Near-flawless, expressive and precise',
+      'Best-in-class. Every move reads perfectly',
+    ]
+  },
+  {
+    id:'fidelity', name:'Visual fidelity', weight:0.07, group:'Visuals',
+    desc:'Technical rendering quality: resolution, texture detail, lighting, and environmental density. Weighted lowest because raw fidelity without art direction or stable performance is worthless.',
+    labels:[
+      'Looks broken or unfinished',
+      "Extremely poor, below the era's baseline",
+      'Noticeably rough, muddy textures',
+      'Below average for its release window',
+      'Average — meets minimum expectations',
+      'Solid, nothing special',
+      'Above average, clean and detailed',
+      'Good fidelity, well-lit environments',
+      'High quality, consistent across the board',
+      'Technically impressive in most areas',
+      'State of the art. A technical showpiece',
+    ]
+  },
 ];
 
 const scores = {};
 CRITERIA.forEach(c => scores[c.id] = 5);
-
 let editingId = null;
 
-/* ---- BUILD CRITERIA SLIDERS ---- */
+const GRADE_WORDS = ['awful','awful','poor','below avg','mediocre','average','decent','good','great','excellent','perfect'];
+const GRADES   = [[9,'A+'],[8,'A'],[7,'B'],[6,'C'],[5,'D'],[0,'F']];
+const VERDICTS = [[9,'Exceptional'],[8,'Recommended'],[7,'Good'],[6,'Average'],[5,'Below avg'],[0,'Avoid']];
+
+/* BUILD SLIDERS */
 const cc = document.getElementById('criteria-card');
+const bd = document.getElementById('breakdown');
+let lastGroup = '';
+
 CRITERIA.forEach(c => {
+  if (c.group !== lastGroup) {
+    lastGroup = c.group;
+    const gl = document.createElement('div');
+    gl.className = 'crit-group-label';
+    gl.textContent = c.group;
+    cc.appendChild(gl);
+  }
+
   const row = document.createElement('div');
   row.className = 'crit-row';
   row.innerHTML = `
-    <div class="crit-info">
-      <div class="crit-name">${c.name}</div>
-      <div class="crit-sub">${c.sub}</div>
-      <div class="crit-weight">${Math.round(c.weight*100)}% weight</div>
-    </div>
-    <div class="range-wrap">
+    <div>
+      <div class="crit-name">${c.name}<span class="weight-chip">${Math.round(c.weight*100)}%</span></div>
+      <div class="crit-desc">${c.desc}</div>
       <input type="range" min="0" max="10" step="1" value="5" id="r-${c.id}"
         oninput="setScore('${c.id}',this.value)" style="width:100%">
+      <div class="rating-bubble" id="rb-${c.id}">${c.labels[5]}</div>
     </div>
-    <div class="crit-val" id="v-${c.id}">5</div>
+    <div class="crit-right">
+      <div class="crit-val" id="v-${c.id}">5</div>
+      <div class="crit-val-word" id="vw-${c.id}">average</div>
+    </div>
   `;
   cc.appendChild(row);
-});
 
-/* ---- BUILD BREAKDOWN ---- */
-const bd = document.getElementById('breakdown');
-CRITERIA.forEach(c => {
-  const row = document.createElement('div');
-  row.className = 'breakdown-row';
-  row.innerHTML = `
+  const br = document.createElement('div');
+  br.className = 'breakdown-row';
+  br.innerHTML = `
     <div class="breakdown-name">${c.name}</div>
     <div class="breakdown-bar-wrap"><div class="breakdown-fill" id="bf-${c.id}" style="width:50%"></div></div>
     <div class="breakdown-num" id="bn-${c.id}">5</div>
   `;
-  bd.appendChild(row);
+  bd.appendChild(br);
 });
 
-/* ---- SCORING ---- */
 function setScore(id, val) {
-  scores[id] = parseInt(val);
-  document.getElementById('v-'+id).textContent = val;
+  val = parseInt(val);
+  scores[id] = val;
+  const c = CRITERIA.find(x => x.id === id);
+  document.getElementById('v-'+id).textContent  = val;
+  document.getElementById('vw-'+id).textContent = GRADE_WORDS[val];
+  document.getElementById('rb-'+id).textContent = c.labels[val];
   document.getElementById('bn-'+id).textContent = val;
   document.getElementById('bf-'+id).style.width = (val*10)+'%';
   updateScore();
 }
 
-function updateScore() {
+function calcScore() {
   let w = 0;
   CRITERIA.forEach(c => w += scores[c.id] * c.weight);
-  const ws = parseFloat(w.toFixed(1));
-  const pct = ws / 10;
+  return parseFloat(w.toFixed(1));
+}
+
+function updateScore() {
+  const ws      = calcScore();
+  const grade   = GRADES.find(([t]) => ws >= t)[1];
+  const verdict = VERDICTS.find(([t]) => ws >= t)[1];
+  const cls     = ws >= 7 ? 'hi' : ws >= 5 ? 'mid' : 'lo';
 
   const el = document.getElementById('fs-score');
   el.textContent = ws.toFixed(1);
-  el.className = 'score-card-val ' + (ws>=7?'hi':ws>=5?'mid':'lo');
+  el.className = 'score-card-val ' + cls;
 
-  const grades = [[9,'A+'],[8,'A'],[7,'B'],[6,'C'],[5,'D'],[0,'F']];
-  const grade = grades.find(([t])=>ws>=t)[1];
   const ge = document.getElementById('fs-grade');
   ge.textContent = grade;
-  ge.className = 'score-card-val ' + (ws>=7?'hi':ws>=5?'mid':'lo');
+  ge.className = 'score-card-val ' + cls;
 
-  const verdicts = [[9,'Exceptional'],[8,'Recommended'],[7,'Good'],[6,'Average'],[5,'Below avg'],[0,'Avoid']];
-  const verdict = verdicts.find(([t])=>ws>=t)[1];
   document.getElementById('fs-verdict').textContent = verdict;
 
   const bar = document.getElementById('score-bar');
-  bar.style.width = Math.round(pct*100)+'%';
+  bar.style.width = Math.round(ws/10*100) + '%';
   bar.style.background = ws>=7?'var(--green)':ws>=5?'var(--amber)':'var(--red)';
-  document.getElementById('pct-label').textContent = Math.round(pct*100)+'%';
-
-  const price = parseFloat(document.getElementById('g-price').value)||0;
-  const hours = parseFloat(document.getElementById('g-hours').value)||0;
-  const vv = document.getElementById('fs-value');
-  if (price>0&&hours>0) {
-    vv.textContent = '$'+(price/hours).toFixed(2)+'/hr';
-  } else {
-    vv.textContent = '—';
-  }
+  document.getElementById('pct-label').textContent = Math.round(ws/10*100) + '%';
 }
 
-function onFieldChange(){}
-
-/* ---- PILLS / FLAGS ---- */
-function togglePill(el){
-  el.classList.toggle('pos');
-}
-function toggleFlag(el, type){
-  if(type==='pos') el.classList.toggle('pos');
+function togglePill(el) { el.classList.toggle('pos'); }
+function toggleFlag(el, type) {
+  if (type==='pos') el.classList.toggle('pos');
   else el.classList.toggle('neg');
 }
 
-/* ---- PANELS ---- */
-function showPanel(name){
-  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+function showPanel(name) {
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
   document.getElementById('panel-'+name).classList.add('active');
-  if(name==='reviews') renderReviews();
-  window.scrollTo({top:0,behavior:'smooth'});
+  if (name === 'reviews') renderReviews();
+  window.scrollTo({top:0, behavior:'smooth'});
 }
+function newReview() { editingId = null; clearForm(); showPanel('form'); }
 
-function newReview(){
-  editingId = null;
-  clearForm();
-  showPanel('form');
+function getReviews() {
+  try { return JSON.parse(localStorage.getItem('gamelog-reviews') || '[]'); }
+  catch(e) { return []; }
 }
+function saveReviews(list) { localStorage.setItem('gamelog-reviews', JSON.stringify(list)); }
 
-/* ---- STORAGE ---- */
-function getReviews(){
-  try{ return JSON.parse(localStorage.getItem('gamelog-reviews')||'[]'); }
-  catch(e){ return []; }
-}
-function saveReviews(list){
-  localStorage.setItem('gamelog-reviews', JSON.stringify(list));
-}
-
-/* ---- SAVE ---- */
-function saveReview(){
+function saveReview() {
   const title = document.getElementById('g-title').value.trim();
-  if(!title){ toast('Add a game title first'); return; }
-
-  let w=0;
-  CRITERIA.forEach(c=>w+=scores[c.id]*c.weight);
-  const ws = parseFloat(w.toFixed(1));
-
+  if (!title) { toast('Add a game title first'); return; }
   const review = {
     id: editingId || Date.now().toString(),
     title,
     platform: document.getElementById('g-platform').value,
-    year: document.getElementById('g-year').value,
-    dev: document.getElementById('g-dev').value,
-    pub: document.getElementById('g-pub').value,
-    hours: document.getElementById('g-hours').value,
-    price: document.getElementById('g-price').value,
-    status: document.getElementById('g-status').value,
-    genres: [...document.querySelectorAll('#genre-tags .pill.pos')].map(b=>b.textContent),
-    scores: {...scores},
-    finalScore: ws,
+    year:     document.getElementById('g-year').value,
+    dev:      document.getElementById('g-dev').value,
+    pub:      document.getElementById('g-pub').value,
+    hours:    document.getElementById('g-hours').value,
+    price:    document.getElementById('g-price').value,
+    status:   document.getElementById('g-status').value,
+    genres:   [...document.querySelectorAll('#genre-tags .pill.pos')].map(b=>b.textContent),
+    scores:   {...scores},
+    finalScore: calcScore(),
     posFlags: [...document.querySelectorAll('#pos-flags .pill.pos')].map(b=>b.textContent),
     negFlags: [...document.querySelectorAll('#neg-flags .pill.neg')].map(b=>b.textContent),
-    notePos: document.getElementById('note-pos').value,
-    noteNeg: document.getElementById('note-neg').value,
-    noteSum: document.getElementById('note-sum').value,
-    savedAt: new Date().toISOString(),
+    notePos:  document.getElementById('note-pos').value,
+    noteNeg:  document.getElementById('note-neg').value,
+    noteSum:  document.getElementById('note-sum').value,
+    savedAt:  new Date().toISOString(),
   };
-
-  const list = getReviews().filter(r=>r.id!==review.id);
+  const list = getReviews().filter(r => r.id !== review.id);
   list.unshift(review);
   saveReviews(list);
   toast('Review saved');
   showPanel('reviews');
 }
 
-/* ---- LOAD REVIEW INTO FORM ---- */
-function loadReview(review){
+function loadReview(review) {
   editingId = review.id;
-  document.getElementById('g-title').value = review.title||'';
-  document.getElementById('g-platform').value = review.platform||'';
-  document.getElementById('g-year').value = review.year||'';
-  document.getElementById('g-dev').value = review.dev||'';
-  document.getElementById('g-pub').value = review.pub||'';
-  document.getElementById('g-hours').value = review.hours||'';
-  document.getElementById('g-price').value = review.price||'';
-  document.getElementById('g-status').value = review.status||'';
-  document.getElementById('note-pos').value = review.notePos||'';
-  document.getElementById('note-neg').value = review.noteNeg||'';
-  document.getElementById('note-sum').value = review.noteSum||'';
+  document.getElementById('g-title').value    = review.title    || '';
+  document.getElementById('g-platform').value = review.platform || '';
+  document.getElementById('g-year').value     = review.year     || '';
+  document.getElementById('g-dev').value      = review.dev      || '';
+  document.getElementById('g-pub').value      = review.pub      || '';
+  document.getElementById('g-hours').value    = review.hours    || '';
+  document.getElementById('g-price').value    = review.price    || '';
+  document.getElementById('g-status').value   = review.status   || '';
+  document.getElementById('note-pos').value   = review.notePos  || '';
+  document.getElementById('note-neg').value   = review.noteNeg  || '';
+  document.getElementById('note-sum').value   = review.noteSum  || '';
 
-  document.querySelectorAll('#genre-tags .pill').forEach(b=>{
-    b.classList.toggle('pos',(review.genres||[]).includes(b.textContent));
-  });
-  document.querySelectorAll('#pos-flags .pill').forEach(b=>{
-    b.classList.toggle('pos',(review.posFlags||[]).includes(b.textContent));
-  });
-  document.querySelectorAll('#neg-flags .pill').forEach(b=>{
-    b.classList.toggle('neg',(review.negFlags||[]).includes(b.textContent));
+  document.querySelectorAll('#genre-tags .pill').forEach(b =>
+    b.classList.toggle('pos', (review.genres||[]).includes(b.textContent)));
+  document.querySelectorAll('#pos-flags .pill').forEach(b =>
+    b.classList.toggle('pos', (review.posFlags||[]).includes(b.textContent)));
+  document.querySelectorAll('#neg-flags .pill').forEach(b =>
+    b.classList.toggle('neg', (review.negFlags||[]).includes(b.textContent)));
+
+  CRITERIA.forEach(c => {
+    const val = (review.scores||{})[c.id] ?? 5;
+    scores[c.id] = val;
+    document.getElementById('r-'+c.id).value  = val;
+    document.getElementById('v-'+c.id).textContent  = val;
+    document.getElementById('vw-'+c.id).textContent = GRADE_WORDS[val];
+    document.getElementById('rb-'+c.id).textContent = c.labels[val];
+    document.getElementById('bn-'+c.id).textContent = val;
+    document.getElementById('bf-'+c.id).style.width = (val*10)+'%';
   });
 
-  CRITERIA.forEach(c=>{
-    const val = (review.scores||{})[c.id]??5;
-    scores[c.id]=val;
-    document.getElementById('r-'+c.id).value=val;
-    document.getElementById('v-'+c.id).textContent=val;
-    document.getElementById('bn-'+c.id).textContent=val;
-    document.getElementById('bf-'+c.id).style.width=(val*10)+'%';
-  });
-
-  document.getElementById('export-box').style.display='none';
+  document.getElementById('export-box').style.display = 'none';
   updateScore();
   showPanel('form');
 }
 
-/* ---- RENDER REVIEWS LIST ---- */
-function renderReviews(){
+function renderReviews() {
   const list = getReviews();
   const container = document.getElementById('reviews-list');
-  const empty = document.getElementById('reviews-empty');
-  container.innerHTML='';
+  const empty     = document.getElementById('reviews-empty');
+  container.innerHTML = '';
+  if (list.length === 0) { empty.style.display='block'; return; }
+  empty.style.display = 'none';
 
-  if(list.length===0){
-    empty.style.display='block';
-    return;
-  }
-  empty.style.display='none';
-
-  const grades=[[9,'A+'],[8,'A'],[7,'B'],[6,'C'],[5,'D'],[0,'F']];
-  const verdicts=[[9,'Exceptional'],[8,'Recommended'],[7,'Good'],[6,'Average'],[5,'Below avg'],[0,'Avoid']];
-
-  list.forEach(r=>{
-    const ws=r.finalScore||0;
-    const grade=grades.find(([t])=>ws>=t)[1];
-    const verdict=verdicts.find(([t])=>ws>=t)[1];
-    const color=ws>=7?'var(--green)':ws>=5?'var(--amber)':'var(--red)';
-    const meta=[r.platform,r.year,r.dev,r.status].filter(Boolean).join(' · ');
-    const item=document.createElement('div');
-    item.className='review-item';
-    item.innerHTML=`
+  list.forEach(r => {
+    const ws      = r.finalScore || 0;
+    const grade   = GRADES.find(([t]) => ws>=t)[1];
+    const verdict = VERDICTS.find(([t]) => ws>=t)[1];
+    const color   = ws>=7?'var(--green)':ws>=5?'var(--amber)':'var(--red)';
+    const meta    = [r.platform,r.year,r.dev,r.status].filter(Boolean).join(' · ');
+    const item    = document.createElement('div');
+    item.className = 'review-item';
+    item.innerHTML = `
       <div class="review-score-badge" style="color:${color}">${ws.toFixed(1)}</div>
       <div class="review-info">
         <div class="review-title">${escHtml(r.title)}</div>
         <div class="review-meta">${escHtml(meta)} &nbsp;·&nbsp; ${grade} &nbsp;·&nbsp; ${verdict}</div>
-        ${r.genres&&r.genres.length?`<div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap">${r.genres.map(g=>`<span style="font-size:10px;font-family:var(--mono);color:var(--text3);background:var(--bg4);padding:2px 6px;border-radius:2px">${escHtml(g)}</span>`).join('')}</div>`:``}
+        ${r.genres&&r.genres.length?`<div style="margin-top:4px;display:flex;gap:4px;flex-wrap:wrap">${r.genres.map(g=>`<span style="font-size:10px;font-family:var(--mono);color:var(--text3);background:var(--bg4);padding:2px 6px;border-radius:2px">${escHtml(g)}</span>`).join('')}</div>`:''}
       </div>
       <div class="review-actions">
-        <button class="icon-btn" title="Edit" onclick="event.stopPropagation();loadReview(getReviewById('${r.id}'))">✎</button>
+        <button class="icon-btn" title="Edit"   onclick="event.stopPropagation();loadReview(getReviewById('${r.id}'))">✎</button>
         <button class="icon-btn" title="Export" onclick="event.stopPropagation();exportById('${r.id}')">⬇</button>
-        <button class="icon-btn" title="Delete" style="color:var(--text3)" onclick="event.stopPropagation();deleteReview('${r.id}')">✕</button>
+        <button class="icon-btn" title="Delete" onclick="event.stopPropagation();deleteReview('${r.id}')">✕</button>
       </div>
     `;
-    item.addEventListener('click',()=>loadReview(r));
+    item.addEventListener('click', () => loadReview(r));
     container.appendChild(item);
   });
 }
 
-function getReviewById(id){
-  return getReviews().find(r=>r.id===id);
-}
-
-function deleteReview(id){
-  if(!confirm('Delete this review?')) return;
-  saveReviews(getReviews().filter(r=>r.id!==id));
+function getReviewById(id) { return getReviews().find(r => r.id === id); }
+function deleteReview(id) {
+  if (!confirm('Delete this review?')) return;
+  saveReviews(getReviews().filter(r => r.id !== id));
   renderReviews();
   toast('Review deleted');
 }
 
-/* ---- EXPORT ---- */
-function buildExportText(review){
-  const ws = review ? review.finalScore : (() => {
-    let w=0; CRITERIA.forEach(c=>w+=scores[c.id]*c.weight); return parseFloat(w.toFixed(1));
-  })();
-  const grades=[[9,'A+'],[8,'A'],[7,'B'],[6,'C'],[5,'D'],[0,'F']];
-  const grade=grades.find(([t])=>ws>=t)[1];
-
+function buildExportText(review) {
   const r = review || {
-    title:document.getElementById('g-title').value||'Untitled',
-    platform:document.getElementById('g-platform').value,
-    year:document.getElementById('g-year').value,
-    dev:document.getElementById('g-dev').value,
-    pub:document.getElementById('g-pub').value,
-    hours:document.getElementById('g-hours').value,
-    price:document.getElementById('g-price').value,
-    status:document.getElementById('g-status').value,
-    genres:[...document.querySelectorAll('#genre-tags .pill.pos')].map(b=>b.textContent),
-    scores:{...scores},
-    posFlags:[...document.querySelectorAll('#pos-flags .pill.pos')].map(b=>b.textContent),
-    negFlags:[...document.querySelectorAll('#neg-flags .pill.neg')].map(b=>b.textContent),
-    notePos:document.getElementById('note-pos').value,
-    noteNeg:document.getElementById('note-neg').value,
-    noteSum:document.getElementById('note-sum').value,
+    title:    document.getElementById('g-title').value || 'Untitled',
+    platform: document.getElementById('g-platform').value,
+    year:     document.getElementById('g-year').value,
+    dev:      document.getElementById('g-dev').value,
+    pub:      document.getElementById('g-pub').value,
+    hours:    document.getElementById('g-hours').value,
+    price:    document.getElementById('g-price').value,
+    status:   document.getElementById('g-status').value,
+    genres:   [...document.querySelectorAll('#genre-tags .pill.pos')].map(b=>b.textContent),
+    scores:   {...scores},
+    posFlags: [...document.querySelectorAll('#pos-flags .pill.pos')].map(b=>b.textContent),
+    negFlags: [...document.querySelectorAll('#neg-flags .pill.neg')].map(b=>b.textContent),
+    notePos:  document.getElementById('note-pos').value,
+    noteNeg:  document.getElementById('note-neg').value,
+    noteSum:  document.getElementById('note-sum').value,
   };
-
-  const lines=[];
+  const ws    = review ? review.finalScore : calcScore();
+  const grade = GRADES.find(([t]) => ws >= t)[1];
+  const lines = [];
   lines.push('=== GAMELOG REVIEW ===');
   lines.push('');
-  lines.push('Title:      '+r.title);
-  if(r.platform) lines.push('Platform:   '+r.platform);
-  if(r.year)     lines.push('Year:       '+r.year);
-  if(r.dev)      lines.push('Developer:  '+r.dev);
-  if(r.pub)      lines.push('Publisher:  '+r.pub);
-  if(r.genres&&r.genres.length) lines.push('Genre:      '+(r.genres.join(', ')));
-  if(r.hours)    lines.push('Hours:      '+r.hours);
-  if(r.price)    lines.push('Price:      $'+r.price);
-  if(r.hours&&r.price) lines.push('Value:      $'+(r.price/r.hours).toFixed(2)+'/hr');
-  if(r.status)   lines.push('Status:     '+r.status);
+  lines.push('Title:       ' + r.title);
+  if (r.platform) lines.push('Platform:    ' + r.platform);
+  if (r.year)     lines.push('Year:        ' + r.year);
+  if (r.dev)      lines.push('Developer:   ' + r.dev);
+  if (r.pub)      lines.push('Publisher:   ' + r.pub);
+  if (r.genres&&r.genres.length) lines.push('Genre:       ' + r.genres.join(', '));
+  if (r.hours)    lines.push('Hours:       ' + r.hours);
+  if (r.price)    lines.push('Price:       $' + r.price);
+  if (r.hours&&r.price) lines.push('Value:       $'+(r.price/r.hours).toFixed(2)+'/hr');
+  if (r.status)   lines.push('Status:      ' + r.status);
   lines.push('');
-  lines.push('--- CRITERIA SCORES ---');
-  CRITERIA.forEach(c=>{
-    const s=(r.scores||scores)[c.id]??scores[c.id];
-    lines.push(c.name.padEnd(16)+s+'/10  ('+Math.round(c.weight*100)+'% weight)');
+  lines.push('--- SCORES ---');
+  CRITERIA.forEach(c => {
+    const s = (r.scores||scores)[c.id] ?? scores[c.id];
+    lines.push(c.name.padEnd(18) + s + '/10  — ' + c.labels[s]);
   });
   lines.push('');
-  lines.push('Final score:  '+ws+'/10  Grade: '+grade);
+  lines.push('Final score:  ' + ws + '/10  Grade: ' + grade);
   lines.push('');
-  if(r.posFlags&&r.posFlags.length){lines.push('Positives:  '+r.posFlags.join(', '));lines.push('');}
-  if(r.negFlags&&r.negFlags.length){lines.push('Negatives:  '+r.negFlags.join(', '));lines.push('');}
-  if(r.notePos){lines.push('Strengths:');lines.push(r.notePos);lines.push('');}
-  if(r.noteNeg){lines.push('Weaknesses:');lines.push(r.noteNeg);lines.push('');}
-  if(r.noteSum){lines.push('Verdict:');lines.push(r.noteSum);lines.push('');}
-  lines.push('Reviewed: '+new Date().toLocaleDateString());
+  if (r.posFlags&&r.posFlags.length) { lines.push('Positives:   '+r.posFlags.join(', ')); lines.push(''); }
+  if (r.negFlags&&r.negFlags.length) { lines.push('Negatives:   '+r.negFlags.join(', ')); lines.push(''); }
+  if (r.notePos) { lines.push('Strengths:'); lines.push(r.notePos); lines.push(''); }
+  if (r.noteNeg) { lines.push('Weaknesses:'); lines.push(r.noteNeg); lines.push(''); }
+  if (r.noteSum) { lines.push('Verdict:');    lines.push(r.noteSum); lines.push(''); }
+  lines.push('Reviewed: ' + new Date().toLocaleDateString());
   return lines.join('\n');
 }
 
-function exportReview(){
-  const box=document.getElementById('export-box');
-  box.textContent=buildExportText(null);
-  box.style.display='block';
+function exportReview() {
+  const box = document.getElementById('export-box');
+  box.textContent = buildExportText(null);
+  box.style.display = 'block';
   box.scrollIntoView({behavior:'smooth'});
 }
-
-function exportById(id){
-  const r=getReviewById(id);
-  if(!r) return;
-  const text=buildExportText(r);
-  navigator.clipboard.writeText(text).then(()=>toast('Copied to clipboard'));
+function exportById(id) {
+  const r = getReviewById(id);
+  if (!r) return;
+  navigator.clipboard.writeText(buildExportText(r)).then(()=>toast('Copied to clipboard'));
+}
+function copyReview() {
+  navigator.clipboard.writeText(buildExportText(null)).then(()=>toast('Copied to clipboard'));
 }
 
-function copyReview(){
-  const text=buildExportText(null);
-  navigator.clipboard.writeText(text).then(()=>toast('Copied to clipboard'));
-}
-
-/* ---- CLEAR FORM ---- */
-function clearForm(){
-  ['g-title','g-dev','g-pub','g-hours','g-price'].forEach(id=>{
-    document.getElementById(id).value='';
+function clearForm() {
+  ['g-title','g-dev','g-pub','g-hours','g-price'].forEach(id => document.getElementById(id).value='');
+  ['g-platform','g-status'].forEach(id => document.getElementById(id).value='');
+  ['note-pos','note-neg','note-sum'].forEach(id => document.getElementById(id).value='');
+  document.querySelectorAll('.pill.pos,.pill.neg').forEach(p => p.classList.remove('pos','neg'));
+  CRITERIA.forEach(c => {
+    scores[c.id] = 5;
+    document.getElementById('r-'+c.id).value  = 5;
+    document.getElementById('v-'+c.id).textContent  = 5;
+    document.getElementById('vw-'+c.id).textContent = GRADE_WORDS[5];
+    document.getElementById('rb-'+c.id).textContent = c.labels[5];
+    document.getElementById('bn-'+c.id).textContent = 5;
+    document.getElementById('bf-'+c.id).style.width = '50%';
   });
-  ['g-platform','g-status'].forEach(id=>{
-    document.getElementById(id).value='';
-  });
-  ['note-pos','note-neg','note-sum'].forEach(id=>{
-    document.getElementById(id).value='';
-  });
-  document.querySelectorAll('.pill.pos,.pill.neg').forEach(p=>{
-    p.classList.remove('pos','neg');
-  });
-  CRITERIA.forEach(c=>{
-    scores[c.id]=5;
-    document.getElementById('r-'+c.id).value=5;
-    document.getElementById('v-'+c.id).textContent=5;
-    document.getElementById('bn-'+c.id).textContent=5;
-    document.getElementById('bf-'+c.id).style.width='50%';
-  });
-  document.getElementById('export-box').style.display='none';
+  document.getElementById('export-box').style.display = 'none';
   updateScore();
 }
 
-/* ---- TOAST ---- */
 let toastTimer;
-function toast(msg){
-  const el=document.getElementById('toast');
-  el.textContent=msg;
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
   el.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>el.classList.remove('show'),2200);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2200);
 }
 
-/* ---- UTILS ---- */
-function escHtml(s){
+function escHtml(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ---- INIT ---- */
 updateScore();
 renderReviews();
 </script>
