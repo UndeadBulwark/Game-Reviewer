@@ -344,20 +344,11 @@ input[type=range]::-moz-range-thumb{
           <span class="pill" onclick="toggleFlag(this,'pos')">Great art direction</span>
         </div>
       </div>
-      <div>
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--text3);margin-bottom:8px">NEGATIVES</div>
-        <div class="tags-wrap" id="neg-flags">
-          <span class="pill" onclick="toggleFlag(this,'neg')">Woke insertions</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Pay-to-win</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Always online</span>
+      <div style="margin-bottom:14px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--text3);margin-bottom:8px">QUALITY NEGATIVES</div>
+        <div class="tags-wrap" id="neg-quality-flags">
           <span class="pill" onclick="toggleFlag(this,'neg')">Poor optimization</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Misleading marketing</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Aggressive DLC</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Broken at launch</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Censored content</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">DEI deductions</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Denuvo/DRM</span>
-          <span class="pill" onclick="toggleFlag(this,'neg')">Kernel AC</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Short campaign</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Poor PC port</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Repetitive missions</span>
@@ -369,7 +360,26 @@ input[type=range]::-moz-range-thumb{
           <span class="pill" onclick="toggleFlag(this,'neg')">Bullet sponge enemies</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Empty open world</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Weak ending</span>
+        </div>
+      </div>
+      <div style="margin-bottom:14px">
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--text3);margin-bottom:8px">CONSUMER NEGATIVES</div>
+        <div class="tags-wrap" id="neg-consumer-flags">
+          <span class="pill" onclick="toggleFlag(this,'neg')">Pay-to-win</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Always online</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Misleading marketing</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Aggressive DLC</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Denuvo/DRM</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Kernel AC</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Live-service grind</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.1em;color:var(--text3);margin-bottom:8px">CONTENT NEGATIVES</div>
+        <div class="tags-wrap" id="neg-content-flags">
+          <span class="pill" onclick="toggleFlag(this,'neg')">Woke insertions</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">Censored content</span>
+          <span class="pill" onclick="toggleFlag(this,'neg')">DEI deductions</span>
           <span class="pill" onclick="toggleFlag(this,'neg')">Body Type A &amp; B</span>
         </div>
       </div>
@@ -600,9 +610,18 @@ const scores = {};
 CRITERIA.forEach(c => scores[c.id] = 5);
 let editingId = null;
 
-const GRADE_WORDS = ['awful','awful','poor','below avg','mediocre','average','decent','good','great','excellent','perfect'];
-const GRADES   = [[9,'A+'],[8,'A'],[7,'B'],[6,'C'],[5,'D'],[0,'F']];
-const VERDICTS = [[9,'Exceptional'],[8,'Recommended'],[7,'Good'],[6,'Average'],[5,'Below avg'],[0,'Avoid']];
+const GRADE_WORDS = ['hot ass','garbage','garbage','poor','poor','average','excellent','excellent','exceptional','exceptional','masterpiece'];
+const GRADES   = [[10,'S'],[8,'A'],[6,'B'],[4.5,'C'],[2.5,'D'],[0.5,'F'],[0,'X']];
+
+function getVerdict(score) {
+  if (score === 10) return 'Masterpiece!';
+  if (score >= 8) return 'Exceptional';
+  if (score >= 6) return 'Excellent';
+  if (score >= 4.5) return 'Average';
+  if (score >= 2.5) return 'Mediocre';
+  if (score >= 0.5) return 'Garbage';
+  return 'HOT ASS!';
+}
 
 /* BUILD SLIDERS */
 const cc = document.getElementById('criteria-card');
@@ -666,8 +685,14 @@ function calcScore() {
 
 function calcFlagImpact() {
   const posCount = document.querySelectorAll('#pos-flags .pill.pos').length;
-  const negCount = document.querySelectorAll('#neg-flags .pill.neg').length;
-  return Math.min(posCount * 0.06, 0.4) - Math.min(negCount * 0.16, 1.0);
+  const qualityNegCount = document.querySelectorAll('#neg-quality-flags .pill.neg').length;
+  const consumerNegCount = document.querySelectorAll('#neg-consumer-flags .pill.neg').length;
+  const contentNegCount = document.querySelectorAll('#neg-content-flags .pill.neg').length;
+  const posImpact = Math.min(posCount * 0.06, 0.4);
+  const qualityImpact = Math.min(qualityNegCount * 0.14, 0.8);
+  const consumerImpact = Math.min(consumerNegCount * 0.18, 0.9);
+  const contentImpact = Math.min(contentNegCount * 0.12, 0.7);
+  return posImpact - qualityImpact - consumerImpact - contentImpact;
 }
 
 function calcValueScore() {
@@ -691,7 +716,7 @@ function calcValueScore() {
 function updateScore() {
   const ws      = calcScore();
   const grade   = GRADES.find(([t]) => ws >= t)[1];
-  const verdict = VERDICTS.find(([t]) => ws >= t)[1];
+  const verdict = getVerdict(ws);
   const cls     = ws >= 7 ? 'hi' : ws >= 5 ? 'mid' : 'lo';
   const valueData = calcValueScore();
   const value = valueData.score;
@@ -757,12 +782,15 @@ function saveReview() {
     scores:   {...scores},
     finalScore: calcScore(),
     posFlags: [...document.querySelectorAll('#pos-flags .pill.pos')].map(b=>b.textContent),
-    negFlags: [...document.querySelectorAll('#neg-flags .pill.neg')].map(b=>b.textContent),
+    negQualityFlags: [...document.querySelectorAll('#neg-quality-flags .pill.neg')].map(b=>b.textContent),
+    negConsumerFlags: [...document.querySelectorAll('#neg-consumer-flags .pill.neg')].map(b=>b.textContent),
+    negContentFlags: [...document.querySelectorAll('#neg-content-flags .pill.neg')].map(b=>b.textContent),
     notePos:  document.getElementById('note-pos').value,
     noteNeg:  document.getElementById('note-neg').value,
     noteSum:  document.getElementById('note-sum').value,
     savedAt:  new Date().toISOString(),
   };
+  review.negFlags = [...review.negQualityFlags, ...review.negConsumerFlags, ...review.negContentFlags];
   const list = getReviews().filter(r => r.id !== review.id);
   list.unshift(review);
   saveReviews(list);
@@ -788,8 +816,13 @@ function loadReview(review) {
     b.classList.toggle('pos', (review.genres||[]).includes(b.textContent)));
   document.querySelectorAll('#pos-flags .pill').forEach(b =>
     b.classList.toggle('pos', (review.posFlags||[]).includes(b.textContent)));
-  document.querySelectorAll('#neg-flags .pill').forEach(b =>
-    b.classList.toggle('neg', (review.negFlags||[]).includes(b.textContent)));
+  const legacyNegFlags = review.negFlags || [];
+  document.querySelectorAll('#neg-quality-flags .pill').forEach(b =>
+    b.classList.toggle('neg', (review.negQualityFlags || legacyNegFlags).includes(b.textContent)));
+  document.querySelectorAll('#neg-consumer-flags .pill').forEach(b =>
+    b.classList.toggle('neg', (review.negConsumerFlags || legacyNegFlags).includes(b.textContent)));
+  document.querySelectorAll('#neg-content-flags .pill').forEach(b =>
+    b.classList.toggle('neg', (review.negContentFlags || legacyNegFlags).includes(b.textContent)));
 
   CRITERIA.forEach(c => {
     const val = (review.scores||{})[c.id] ?? 5;
@@ -818,7 +851,7 @@ function renderReviews() {
   list.forEach(r => {
     const ws      = r.finalScore || 0;
     const grade   = GRADES.find(([t]) => ws>=t)[1];
-    const verdict = VERDICTS.find(([t]) => ws>=t)[1];
+    const verdict = getVerdict(ws);
     const color   = ws>=7?'var(--green)':ws>=5?'var(--amber)':'var(--red)';
     const meta    = [r.platform,r.year,r.dev,r.status].filter(Boolean).join(' · ');
     const item    = document.createElement('div');
